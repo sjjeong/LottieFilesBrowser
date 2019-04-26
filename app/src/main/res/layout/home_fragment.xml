@@ -15,17 +15,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_lottie_file"
-            replaceAll="@{vm.liveLottieInfoItems}"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="4dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:itemCount="20"
-            tools:listitem="@layout/lottie_file_item" />
+            app:refreshing="@{vm.liveRefresh}">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_lottie_file"
+                replaceAll="@{vm.liveLottieInfoItems}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="4dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="20"
+                tools:listitem="@layout/lottie_file_item" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </FrameLayout>
 </layout>

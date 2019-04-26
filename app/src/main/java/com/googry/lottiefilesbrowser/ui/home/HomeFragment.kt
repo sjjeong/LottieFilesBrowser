@@ -18,35 +18,45 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
     private val homeViewModel by viewModel<HomeViewModel>()
 
+    private val endlessScrollListener by lazy {
+        object : EndlessRecyclerViewScrollListener(binding.rvLottieFile.layoutManager!!) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                homeViewModel.onLoad(page)
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = homeViewModel
-        binding.rvLottieFile.run {
-            adapter =
-                object : SimpleRecyclerView.Adapter<LottieInfoResponse, LottieFileItemBinding>(
-                    R.layout.lottie_file_item,
-                    BR.item
-                ) {
+        binding.run {
+            vm = homeViewModel
+            rvLottieFile.run {
+                adapter =
+                    object : SimpleRecyclerView.Adapter<LottieInfoResponse, LottieFileItemBinding>(
+                        R.layout.lottie_file_item,
+                        BR.item
+                    ) {
 
-                    override fun onCreateViewHolder(
-                        parent: ViewGroup,
-                        viewType: Int
-                    ): SimpleRecyclerView.ViewHolder<LottieFileItemBinding> {
-                        return super.onCreateViewHolder(parent, viewType).apply {
-                            binding.lavContent.imageAssetsFolder = "images/"
-                            binding.lavContent.addLottieOnCompositionLoadedListener {
-                                binding.item?.lottieComposition = it
+                        override fun onCreateViewHolder(
+                            parent: ViewGroup,
+                            viewType: Int
+                        ): SimpleRecyclerView.ViewHolder<LottieFileItemBinding> {
+                            return super.onCreateViewHolder(parent, viewType).apply {
+                                binding.lavContent.imageAssetsFolder = "images/"
+                                binding.lavContent.addLottieOnCompositionLoadedListener {
+                                    binding.item?.lottieComposition = it
+                                }
                             }
                         }
+
                     }
 
-                }
-            addOnScrollListener(object : EndlessRecyclerViewScrollListener(layoutManager!!) {
-                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                    homeViewModel.onLoad(page)
-                }
-            })
-            itemAnimator = null
+                addOnScrollListener(endlessScrollListener)
+                itemAnimator = null
+            }
+            refreshLayout.setOnRefreshListener {
+                homeViewModel.refresh()
+            }
         }
     }
 

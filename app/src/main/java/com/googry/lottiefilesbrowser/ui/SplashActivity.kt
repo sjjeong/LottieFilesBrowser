@@ -13,6 +13,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Handler().postDelayed({
             startActivity<HomeActivity>()
+            finish()
         }, 0)
     }
 }

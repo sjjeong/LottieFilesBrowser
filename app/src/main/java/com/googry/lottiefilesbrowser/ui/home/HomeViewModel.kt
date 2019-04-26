@@ -14,13 +14,25 @@ class HomeViewModel(
 
     val liveLottieInfoItems = MutableLiveData<List<LottieInfoResponse>>()
 
+    val liveRefresh = MutableLiveData<Boolean>()
+
     init {
+        refresh()
+    }
+
+    fun refresh() {
         onLoad(0)
+        liveRefresh.value = true
     }
 
     fun onLoad(page: Int) {
         lottieFileDataSource.getLottieInfo(LottieUrl.POPULAR, page + 1, NetworkResponse(
             success = { newData ->
+                if (liveRefresh.value == true) {
+                    liveRefresh.value = false
+                    liveLottieInfoItems.value = newData
+                    return@NetworkResponse
+                }
                 liveLottieInfoItems.value = liveLottieInfoItems.value?.let {
                     it.toMutableList().apply {
                         addAll(newData)

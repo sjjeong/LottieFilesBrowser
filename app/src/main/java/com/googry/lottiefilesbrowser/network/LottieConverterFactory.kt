@@ -1,5 +1,6 @@
 package com.googry.lottiefilesbrowser.network
 
+import com.googry.lottiefilesbrowser.ext.extractNumber
 import com.googry.lottiefilesbrowser.ext.logE
 import com.googry.lottiefilesbrowser.ext.toJsonString
 import com.googry.lottiefilesbrowser.network.model.LottieInfoResponse
@@ -9,6 +10,7 @@ import org.jsoup.Jsoup
 import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
+import java.text.DecimalFormat
 
 class LottieConverterFactory : Converter.Factory() {
     override fun responseBodyConverter(
@@ -29,24 +31,27 @@ class LottieConverterFactory : Converter.Factory() {
     }
 
     companion object {
+
+        val decimalFormat = DecimalFormat("#,###")
+
         val STRING_RESPONSE = Converter<ResponseBody, List<LottieInfoResponse>> {
             Jsoup.parse(it.string())
                 .select("#app > div.bg-white.pb-5 > section.lf-padding.container.mx-auto > div > div > div > div")
                 .map {
-                    val (id, heart) = it.select("likes").run {
-                        attr("id") to attr("count")
+                    val (id, heartCount) = it.select("likes").run {
+                        attr("id") to attr("count").extractNumber()
                     }
                     val author = it.select("h3.text-sm.font-normal.px-2.text-grey-dark").text()
                     val imgUrl = it.select("figure > a > img").attr("src")
-                    val download = it.select("span").text()
+                    val downloadCount = it.select("span").text().extractNumber()
                     val dataUrl = it.select("lottie").attr("path")
                     val data = LottieInfoResponse(
                         id = id,
                         dataUrl = dataUrl,
                         author = author,
                         authorProfileUrl = imgUrl,
-                        heartCount = heart,
-                        downloadCount = download
+                        heartCount = decimalFormat.format(heartCount.toInt()),
+                        downloadCount = decimalFormat.format(downloadCount.toInt())
                     )
 
                     logE("${data.toJsonString()}")

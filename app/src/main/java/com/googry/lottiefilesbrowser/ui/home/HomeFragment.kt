@@ -34,6 +34,9 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                     ): SimpleRecyclerView.ViewHolder<LottieFileItemBinding> {
                         return super.onCreateViewHolder(parent, viewType).apply {
                             binding.lavContent.imageAssetsFolder = "images/"
+                            binding.lavContent.addLottieOnCompositionLoadedListener {
+                                binding.item?.lottieComposition = it
+                            }
                         }
                     }
 

@@ -11,71 +11,111 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@android:color/black"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lav_content"
-            loadLottie="@{item}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true" />
+        android:layout_margin="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lav_content">
+            android:padding="8dp">
 
-
-            <ImageView
-                android:id="@+id/iv_author"
-                loadUrlCircle="@{item.authorProfileUrl}"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_content"
+                loadLottie="@{item}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{item.author}"
-                android:textColor="@android:color/white"
-                app:layout_constraintBottom_toTopOf="@id/tv_download"
-                app:layout_constraintStart_toEndOf="@id/iv_author"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="lottie title" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
-            <TextView
-                android:id="@+id/tv_download"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@{item.downloadCount}"
-                android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="lottie author" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lav_content">
+
+
+                <ImageView
+                    android:id="@+id/iv_author"
+                    loadUrlCircle="@{item.authorProfileUrl}"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{item.author}"
+                    app:layout_constraintStart_toEndOf="@id/iv_author"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="lottie title" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+                    <ImageView
+                        android:id="@+id/iv_heart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_favorite" />
+
+                    <TextView
+                        android:id="@+id/tv_heart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{item.heartCount}"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_heart"
+                        app:layout_constraintStart_toEndOf="@id/iv_heart"
+                        app:layout_constraintTop_toTopOf="@id/iv_heart"
+                        tools:text="12" />
+
+                    <ImageView
+                        android:id="@+id/iv_download"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_file_download"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_heart"
+                        app:layout_constraintStart_toEndOf="@id/tv_heart"
+                        app:layout_constraintTop_toTopOf="@id/iv_heart" />
+
+
+                    <TextView
+                        android:id="@+id/tv_download"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{item.downloadCount}"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_heart"
+                        app:layout_constraintStart_toEndOf="@id/iv_download"
+                        app:layout_constraintTop_toTopOf="@id/iv_heart"
+                        tools:text="2000" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.googry.lottiefilesbrowser.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,13 @@ import com.googry.lottiefilesbrowser.BR
 import com.googry.lottiefilesbrowser.R
 import com.googry.lottiefilesbrowser.base.ui.BaseFragment
 import com.googry.lottiefilesbrowser.base.ui.SimpleRecyclerView
+import com.googry.lottiefilesbrowser.data.enums.LottieUrl
 import com.googry.lottiefilesbrowser.databinding.HomeFragmentBinding
 import com.googry.lottiefilesbrowser.databinding.LottieFileItemBinding
 import com.googry.lottiefilesbrowser.network.model.LottieInfoResponse
 import com.googry.lottiefilesbrowser.util.EndlessRecyclerViewScrollListener
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
 
@@ -30,6 +33,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
             vm = homeViewModel
+            this.view = this@HomeFragment
             rvLottieFile.run {
                 adapter =
                     object : SimpleRecyclerView.Adapter<LottieInfoResponse, LottieFileItemBinding>(
@@ -58,6 +62,22 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                 homeViewModel.refresh()
             }
         }
+    }
+
+    fun onLottieUrlClick() {
+        AlertDialog.Builder(context)
+            .setItems(
+                LottieUrl.values().map { it.name }.toTypedArray()
+            ) { _, i ->
+                run {
+                    homeViewModel.liveLottieUrl.value = LottieUrl.values()[i]
+                    homeViewModel.refresh()
+                }
+            }
+            .setTitle("title")
+            .setNegativeButton("취소", null)
+            .create()
+            .show()
     }
 
     companion object {

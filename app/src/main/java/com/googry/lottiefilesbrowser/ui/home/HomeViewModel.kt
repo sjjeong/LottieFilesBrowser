@@ -15,9 +15,17 @@ class HomeViewModel(
     val liveLottieInfoItems = MutableLiveData<List<LottieInfoResponse>>()
 
     init {
-        lottieFileDataSource.getLottieInfo(LottieUrl.POPULAR, 1, NetworkResponse(
-            success = {
-                liveLottieInfoItems.postValue(it)
+        onLoad(0)
+    }
+
+    fun onLoad(page: Int) {
+        lottieFileDataSource.getLottieInfo(LottieUrl.POPULAR, page + 1, NetworkResponse(
+            success = { newData ->
+                liveLottieInfoItems.value = liveLottieInfoItems.value?.let {
+                    it.toMutableList().apply {
+                        addAll(newData)
+                    }
+                } ?: newData
             }
         )).addTo(compositeDisposable)
     }

@@ -34,7 +34,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://www.lottiefiles.com/")
+            .baseUrl("https://www.lottiefiles.com")
             .client(get())
             .addCallAdapterFactory(get())
             .addConverterFactory(get())

@@ -18,12 +18,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_lottie_file"
             replaceAll="@{vm.liveLottieInfoItems}"
-            tools:itemCount="20"
-            tools:listitem="@layout/lottie_file_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2" />
+            android:clipToPadding="false"
+            android:padding="4dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="20"
+            tools:listitem="@layout/lottie_file_item" />
 
     </FrameLayout>
 </layout>

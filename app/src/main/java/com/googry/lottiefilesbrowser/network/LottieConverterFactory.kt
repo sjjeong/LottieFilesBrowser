@@ -44,7 +44,7 @@ class LottieConverterFactory : Converter.Factory() {
                         id = id,
                         dataUrl = dataUrl,
                         author = author,
-                        authorProfile = imgUrl,
+                        authorProfileUrl = imgUrl,
                         heartCount = heart,
                         downloadCount = download
                     )

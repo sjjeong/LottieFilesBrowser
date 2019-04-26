@@ -2,6 +2,7 @@ package com.googry.lottiefilesbrowser.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import com.googry.lottiefilesbrowser.BR
 import com.googry.lottiefilesbrowser.R
 import com.googry.lottiefilesbrowser.base.ui.BaseFragment
@@ -22,7 +23,27 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
             object : SimpleRecyclerView.Adapter<LottieInfoResponse, LottieFileItemBinding>(
                 R.layout.lottie_file_item,
                 BR.item
-            ) {}
+            ) {
+
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): SimpleRecyclerView.ViewHolder<LottieFileItemBinding> {
+                    return super.onCreateViewHolder(parent, viewType).apply {
+                        binding.lavContent.addLottieOnCompositionLoadedListener {
+                            val (width, height) = it.bounds.let {
+                                (it.right - it.left) to (it.bottom - it.top)
+                            }
+                            val lottieView = binding.lavContent
+                            binding.lavContent.layoutParams =
+                                binding.lavContent.layoutParams.apply {
+                                    this.height = lottieView.width * height / width
+                                }
+                        }
+                    }
+                }
+
+            }
     }
 
     companion object {

@@ -33,16 +33,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                         viewType: Int
                     ): SimpleRecyclerView.ViewHolder<LottieFileItemBinding> {
                         return super.onCreateViewHolder(parent, viewType).apply {
-                            binding.lavContent.addLottieOnCompositionLoadedListener {
-                                val (width, height) = it.bounds.let {
-                                    (it.right - it.left) to (it.bottom - it.top)
-                                }
-                                val lottieView = binding.lavContent
-                                binding.lavContent.layoutParams =
-                                    binding.lavContent.layoutParams.apply {
-                                        this.height = lottieView.width * height / width
-                                    }
-                            }
+                            binding.lavContent.imageAssetsFolder = "images/"
                         }
                     }
 
@@ -52,6 +43,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(R.layout.home_fragment) {
                     homeViewModel.onLoad(page)
                 }
             })
+            itemAnimator = null
         }
     }
 

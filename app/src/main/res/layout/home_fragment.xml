@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:padding="4dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:itemCount="20"
             tools:listitem="@layout/lottie_file_item" />

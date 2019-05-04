@@ -23,7 +23,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lav_content"
-                loadLottie="@{item}"
+                lottieUrl="@{item.dataUrl}"
+                lottieComposition="@{item.lottieComposition}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="1:1"

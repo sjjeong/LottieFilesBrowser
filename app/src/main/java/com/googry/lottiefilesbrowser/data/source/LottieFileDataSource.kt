@@ -1,6 +1,6 @@
 package com.googry.lottiefilesbrowser.data.source
 
-import com.googry.lottiefilesbrowser.base.network.NetworkResponse
+import com.dino.library.network.NetworkResponse
 import com.googry.lottiefilesbrowser.data.enums.LottieUrl
 import com.googry.lottiefilesbrowser.network.model.LottieInfoResponse
 import io.reactivex.disposables.Disposable

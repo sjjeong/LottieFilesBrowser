@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dino.library.ui.BaseFragment
+import com.dino.library.ui.SimpleRecyclerView
+import com.dino.library.util.EndlessRecyclerViewScrollListener
 import com.googry.lottiefilesbrowser.BR
 import com.googry.lottiefilesbrowser.R
-import com.googry.lottiefilesbrowser.base.ui.BaseFragment
-import com.googry.lottiefilesbrowser.base.ui.SimpleRecyclerView
 import com.googry.lottiefilesbrowser.data.enums.LottieUrl
 import com.googry.lottiefilesbrowser.databinding.HomeFragmentBinding
 import com.googry.lottiefilesbrowser.databinding.LottieFileItemBinding
 import com.googry.lottiefilesbrowser.network.model.LottieInfoResponse
-import com.googry.lottiefilesbrowser.util.EndlessRecyclerViewScrollListener
 import org.koin.android.viewmodel.ext.android.viewModel
 
 

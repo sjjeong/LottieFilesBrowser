@@ -1,8 +1,8 @@
 package com.googry.lottiefilesbrowser.network
 
-import com.googry.lottiefilesbrowser.ext.extractNumber
-import com.googry.lottiefilesbrowser.ext.logE
-import com.googry.lottiefilesbrowser.ext.toJsonString
+import com.dino.library.ext.extractNumber
+import com.dino.library.ext.logE
+import com.dino.library.ext.toJsonString
 import com.googry.lottiefilesbrowser.network.model.LottieInfoResponse
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
